@@ -1,67 +1,68 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { collection, getDocs, query, where } from 'firebase/firestore'
+import { dbFirestore } from '/firebase'
 
-const events = [
-  {
-    id: 1,
-    title: 'XXX AKU Kevät23',
-    thumbnail: '/assets/thumbnails/ks23.png',
-    images: [
-      '/assets/images/KevätSlalom2023/1.jpg',
-      '/assets/images/KevätSlalom2023/2.jpg',
-      '/assets/images/KevätSlalom2023/3.jpg',
-      '/assets/images/KevätSlalom2023/4.jpg',
-      '/assets/images/KevätSlalom2023/5.jpg',
-      '/assets/images/KevätSlalom2023/6.jpg',
-      '/assets/images/KevätSlalom2023/7.jpg',
-      '/assets/images/KevätSlalom2023/8.jpg',
-      '/assets/images/KevätSlalom2023/9.jpg',
-      '/assets/images/KevätSlalom2023/10.jpg',
-      '/assets/images/KevätSlalom2023/11.jpg',
-    ],
-  },
-  {
-    id: 2,
-    title: 'XXVI AKU Syys22',
-    thumbnail: '/assets/thumbnails/ss22.png',
-    images: [
-      '/assets/images/SyysSlalom2022/1.JPG',
-      '/assets/images/SyysSlalom2022/2.JPG',
-      '/assets/images/SyysSlalom2022/3.JPG',
-      '/assets/images/SyysSlalom2022/4.JPG',
-      '/assets/images/SyysSlalom2022/5.JPG',
-      '/assets/images/SyysSlalom2022/6.JPG',
-      '/assets/images/SyysSlalom2022/7.JPG',
-      '/assets/images/SyysSlalom2022/8.JPG',
-      '/assets/images/SyysSlalom2022/9.JPG',
-      '/assets/images/SyysSlalom2022/10.JPG',
-      '/assets/images/SyysSlalom2022/11.JPG',
-      '/assets/images/SyysSlalom2022/12.JPG',
-      '/assets/images/SyysSlalom2022/13.JPG',
-      '/assets/images/SyysSlalom2022/14.JPG',
-    ],
-  },
-  {
-    id: 3,
-    title: 'Sekalaisia kuvia',
-    thumbnail: '/assets/thumbnails/seka.jpg',
-    images: [
-      '/assets/images/Sekalaiset/1.jpeg',
-      '/assets/images/Sekalaiset/2.jpg',
-      '/assets/images/Sekalaiset/3.png',
-      '/assets/images/Sekalaiset/4.jpg',
-    ],
-  },
+const GALLERY_CONFIG = [
+  { id: 1, category: 'KevatSlalom2023', title: 'XXX AKU Kevät23', thumbnailTitle: 'ks23' },
+  { id: 2, category: 'SyysSlalom2022', title: 'XXVI AKU Syys22', thumbnailTitle: 'ss22' },
+  { id: 3, category: 'Sekalaiset', title: 'Sekalaisia kuvia', thumbnailTitle: 'seka' },
 ]
 
 function Gallery() {
+  const [thumbnails, setThumbnails] = useState([])
+  const [events, setEvents] = useState([])
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  const openPopup = (event) => {
-    setSelectedEvent(event)
+  useEffect(() => {
+    const fetchThumbnails = async () => {
+      try {
+        const q = query(collection(dbFirestore, 'images'), where('category', '==', 'Thumbnails'))
+        const snapshot = await getDocs(q)
+        const thumbs = snapshot.docs.map(doc => doc.data())
+
+        const eventThumbs = GALLERY_CONFIG.map(config => {
+          const thumb = thumbs.find(t => t.title === config.thumbnailTitle)
+          return {
+            id: config.id,
+            title: config.title,
+            category: config.category,
+            thumbnail: thumb?.url || '',
+          }
+        })
+
+        setThumbnails(thumbs)
+        setEvents(eventThumbs)
+      } catch (error) {
+        console.error("Virhe haettaessa thumbnail-kuvia:", error)
+      }
+    }
+
+    fetchThumbnails()
+  }, [])
+
+  const openPopup = async (eventConfig) => {
+    setSelectedEvent(null)
     setSelectedImageIndex(0)
     setIsFullscreen(false)
+
+    try {
+      const q = query(collection(dbFirestore, 'images'), where('category', '==', eventConfig.category))
+      const snapshot = await getDocs(q)
+      const images = snapshot.docs.map(doc => doc.data().url)
+
+      const thumb = thumbnails.find(t => t.title === GALLERY_CONFIG.find(g => g.category === eventConfig.category)?.thumbnailTitle)
+
+      setSelectedEvent({
+        id: eventConfig.id,
+        title: eventConfig.title,
+        thumbnail: thumb?.url || '',
+        images,
+      })
+    } catch (error) {
+      console.error("Virhe haettaessa kuvia:", error)
+    }
   }
 
   const closePopup = () => {
@@ -70,13 +71,13 @@ function Gallery() {
   }
 
   const nextImage = () => {
-    setSelectedImageIndex((prev) =>
+    setSelectedImageIndex(prev =>
       prev + 1 < selectedEvent.images.length ? prev + 1 : 0
     )
   }
 
   const prevImage = () => {
-    setSelectedImageIndex((prev) =>
+    setSelectedImageIndex(prev =>
       prev - 1 >= 0 ? prev - 1 : selectedEvent.images.length - 1
     )
   }
@@ -100,12 +101,14 @@ function Gallery() {
             onClick={() => openPopup(event)}
           >
             <h3 className="thumbnail-title">{event.title}</h3>
-            <img
-              src={event.thumbnail}
-              alt={event.title}
-              className="thumbnail"
-              loading="lazy"
-            />
+            {event.thumbnail && (
+              <img
+                src={event.thumbnail}
+                alt={event.title}
+                className="thumbnail"
+                loading="lazy"
+              />
+            )}
           </div>
         ))}
       </div>
@@ -124,14 +127,6 @@ function Gallery() {
               onClick={toggleFullscreen}
               loading="eager"
             />
-
-            {selectedImageIndex + 1 < selectedEvent.images.length && (
-              <link
-                rel="preload"
-                as="image"
-                href={selectedEvent.images[selectedImageIndex + 1]}
-              />
-            )}
 
             {!isFullscreen && (
               <div className="popup-buttons">
