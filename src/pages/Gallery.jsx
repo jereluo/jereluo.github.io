@@ -128,6 +128,15 @@ function Gallery() {
               loading="eager"
             />
 
+
+      {selectedImageIndex + 1 < selectedEvent.images.length && (
+        <link
+          rel="preload"
+          as="image"
+          href={selectedEvent.images[selectedImageIndex + 1]}
+        />
+      )}
+
             {!isFullscreen && (
               <div className="popup-buttons">
                 <button onClick={prevImage} className="popup-button">Edellinen</button>
