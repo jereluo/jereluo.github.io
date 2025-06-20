@@ -5,6 +5,7 @@ function Footer() {
       <a href="https://koneharjuoy.fi/" target="_blank" rel="noopener noreferrer">
   <img
     src="assets/images/Sponsorit/koneharju.png"
+    style={{ height: '50px' }}
     alt="Koneharju Oy"
     className="sponsor-logo"
   />
@@ -14,6 +15,7 @@ function Footer() {
   <img
     src="assets/images/Sponsorit/Path to 100.png"
     alt="Path to 100"
+    style={{ height: '65px' }}
     className="sponsor-logo"
   />
 </a>
@@ -22,6 +24,7 @@ function Footer() {
   <img
     src="assets/images/Sponsorit/hytonen.png"
     alt="Autokorjaamo Velj. Hytönen Oy"
+    style={{ height: '50px' }}
     className="sponsor-logo"
   />
 </a>
