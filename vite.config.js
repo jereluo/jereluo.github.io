@@ -10,7 +10,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) {
+            if (id.match(/react|react-dom|scheduler|react\/jsx-runtime/)) {
               return 'vendor_react'
             }
             if (id.includes('firebase')) {
