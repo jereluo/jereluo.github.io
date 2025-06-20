@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { dbFirestore } from '/firebase'
+import './Gallery.css'
+
 
 const GALLERY_CONFIG = [
   { id: 1, category: 'KevatSlalom2023', title: 'XXX AKU Kevät23', thumbnailTitle: 'ks23' },

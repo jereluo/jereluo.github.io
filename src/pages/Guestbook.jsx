@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "/firebase";
 import { ref, push, onValue } from "firebase/database";
+import './Guestbook.css'
 
 export default function Guestbook() {
   const [name, setName] = useState("");

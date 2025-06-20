@@ -1,4 +1,5 @@
 import { FaInstagram, FaFacebook, FaEnvelope } from 'react-icons/fa';
+import './Contact.css'
 
 function Contact() {
   return (
