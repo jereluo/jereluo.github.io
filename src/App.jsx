@@ -9,8 +9,8 @@ import Home from './pages/Home'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact' 
 import Guestbook from './pages/Guestbook'
-import heroImage from '/assets/images/hero.jpg'
-import h1Image from '/assets/images/h1.png'
+import heroImage from '/assets/images/Hero/hero.jpg'
+import h1Image from '/assets/images/Hero/h1.png'
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)

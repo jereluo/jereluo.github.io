@@ -3,7 +3,6 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { dbFirestore } from '/firebase'
 import './Gallery.css'
 
-
 const GALLERY_CONFIG = [
   { id: 1, category: 'KevatSlalom2023', title: 'XXX AKU Kevät23', thumbnailTitle: 'ks23' },
   { id: 2, category: 'SyysSlalom2022', title: 'XXVI AKU Syys22', thumbnailTitle: 'ss22' },
@@ -23,6 +22,12 @@ function Gallery() {
         const q = query(collection(dbFirestore, 'images'), where('category', '==', 'Thumbnails'))
         const snapshot = await getDocs(q)
         const thumbs = snapshot.docs.map(doc => doc.data())
+
+        // Esilataa kuvat
+        thumbs.forEach(t => {
+          const img = new Image()
+          img.src = t.url
+        })
 
         const eventThumbs = GALLERY_CONFIG.map(config => {
           const thumb = thumbs.find(t => t.title === config.thumbnailTitle)
@@ -130,14 +135,13 @@ function Gallery() {
               loading="eager"
             />
 
-
-      {selectedImageIndex + 1 < selectedEvent.images.length && (
-        <link
-          rel="preload"
-          as="image"
-          href={selectedEvent.images[selectedImageIndex + 1]}
-        />
-      )}
+            {selectedImageIndex + 1 < selectedEvent.images.length && (
+              <link
+                rel="preload"
+                as="image"
+                href={selectedEvent.images[selectedImageIndex + 1]}
+              />
+            )}
 
             {!isFullscreen && (
               <div className="popup-buttons">

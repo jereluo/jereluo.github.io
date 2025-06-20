@@ -1,5 +1,5 @@
-import heroImage from '/assets/images/hero.jpg'
-import h1Image from '/assets/images/h1.png'
+import heroImage from '/assets/images/Hero/hero.jpg'
+import h1Image from '/assets/images/Hero/h1.png'
 import './Home.css'
 
 
