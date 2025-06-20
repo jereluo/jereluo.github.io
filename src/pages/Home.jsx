@@ -15,7 +15,8 @@ function Home() {
         }}
       >
         <div className="hero-content">
-            <img src={h1Image} alt="Jylhä Racing" className="hero-title-image" />
+          <img src={h1Image} alt="Jylhä Racing" className="hero-title-image" />
+            <h1 className="hero-title-text">JYLHÄ RACING</h1>
           <h2>Moottoriurheilua suurella sydämellä</h2>
           <div className="hero-buttons">
             <a href="#/gallery" className="hero-button">Katso kuvia</a>
