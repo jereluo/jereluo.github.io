@@ -1,5 +1,4 @@
 import heroImage from '/assets/images/Hero/hero.jpg'
-import h1Image from '/assets/images/Hero/h1.png'
 import './Home.css'
 
 
@@ -15,7 +14,6 @@ function Home() {
         }}
       >
         <div className="hero-content">
-          <img src={h1Image} alt="Jylhä Racing" className="hero-title-image" />
             <h1 className="hero-title-text">JYLHÄ RACING</h1>
           <h2>Moottoriurheilua suurella sydämellä</h2>
           <div className="hero-buttons">
