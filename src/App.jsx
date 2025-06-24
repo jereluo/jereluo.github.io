@@ -10,7 +10,6 @@ import Gallery from './pages/Gallery'
 import Contact from './pages/Contact' 
 import Guestbook from './pages/Guestbook'
 import heroImage from '/assets/images/Hero/hero.jpg'
-import h1Image from '/assets/images/Hero/h1.png'
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)
@@ -20,7 +19,6 @@ function App() {
     const heroImg = new Image()
     const h1Img = new Image()
     heroImg.src = heroImage
-    h1Img.src = h1Image
     
     const timer = setTimeout(() => {
       setShowSplash(false)
