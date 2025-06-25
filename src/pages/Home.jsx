@@ -6,7 +6,8 @@ function Home() {
   return (
     <>
       <div className="blurred-background"></div>
-
+      <img  src={heroImage}  alt="Hero preload"  fetchpriority="high"  loading="eager"  decoding="async"  style={{ display: 'none' }} />
+     
       <section
         className="hero-section full-width"
         style={{

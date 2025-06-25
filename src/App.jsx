@@ -1,32 +1,38 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+
 import SplashScreen from './components/SplashScreen'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import PageWrapper from './components/PageWrapper'
 import Home from './pages/Home'
 import Gallery from './pages/Gallery'
-import Contact from './pages/Contact' 
+import Contact from './pages/Contact'
 import Guestbook from './pages/Guestbook'
+
 import heroImage from '/assets/images/Hero/hero.webp'
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true)
+  const [splashDone, setSplashDone] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
-    const heroImg = new Image()
-    heroImg.src = heroImage
-    
-    const timer = setTimeout(() => {
-      setShowSplash(false)
+    const img = new Image()
+    img.src = heroImage
+    img.onload = () => setImageLoaded(true)
+
+    const minSplashTime = setTimeout(() => {
+      setSplashDone(true)
     }, 2000)
 
-    return () => clearTimeout(timer)
+    return () => clearTimeout(minSplashTime)
   }, [])
 
-  if (showSplash) {
+  const ready = splashDone && imageLoaded
+
+  if (!ready) {
     return <SplashScreen />
   }
 
