@@ -1,13 +1,27 @@
 import heroImage from '/assets/images/Hero/hero.webp'
+import blurredBg from '/assets/images/Hero/bg.webp'
 import './Home.css'
-
 
 function Home() {
   return (
     <>
-      <div className="blurred-background"></div>
-      <img  src={heroImage}  alt="Hero preload"  fetchpriority="high"  loading="eager"  decoding="async"  style={{ display: 'none' }} />
-     
+
+      <div
+        className="blurred-background"
+        style={{
+          backgroundImage: `url(${blurredBg})`
+        }}
+      ></div>
+
+      <img
+        src={heroImage}
+        alt="Hero preload"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+        style={{ display: 'none' }}
+      />
+
       <section
         className="hero-section full-width"
         style={{
@@ -15,7 +29,7 @@ function Home() {
         }}
       >
         <div className="hero-content">
-            <h1 className="hero-title-text">JYLHÄ RACING</h1>
+          <h1 className="hero-title-text">JYLHÄ RACING</h1>
           <h2>Moottoriurheilua suurella sydämellä</h2>
           <div className="hero-buttons">
             <a href="#/gallery" className="hero-button">Katso kuvia</a>
