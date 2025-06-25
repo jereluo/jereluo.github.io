@@ -1,6 +1,17 @@
 /* ----------------------------
    VIERASKIRJA
 ----------------------------- */
+.guestbook-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pinned-icon {
+  color: #ff4a4a; 
+  font-size: 1em;
+}
+
 .guestbook-wrapper {
   max-width: 600px;
   width: 100%;

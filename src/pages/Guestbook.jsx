@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "/firebase";
 import { ref, push, onValue } from "firebase/database";
+import { FaThumbtack } from "react-icons/fa"; 
 import './Guestbook.css';
 
 export default function Guestbook() {
@@ -12,7 +13,6 @@ export default function Guestbook() {
     e.preventDefault();
     if (!name.trim() || !message.trim()) return;
 
-    
     if (name.trim().toLowerCase() === "admin") {
       alert("Nimimerkki 'admin' on varattu vain ylläpidon käyttöön!");
       return;
@@ -40,7 +40,6 @@ export default function Guestbook() {
 
       const formatted = Object.entries(data).map(([id, msg]) => ({ id, ...msg }));
 
-    
       const pinned = formatted.find(msg => msg.name?.toLowerCase() === "admin");
       const others = formatted
         .filter(msg => msg.name?.toLowerCase() !== "admin")
@@ -83,8 +82,15 @@ export default function Guestbook() {
         {messages.length === 0 && <p className="guestbook-no-messages">Ei vielä viestejä.</p>}
         {messages.map((msg) => (
           <div key={msg.id} className="guestbook-message">
-            <div className="guestbook-message-name">{msg.name || "Nimetön"}</div>
-            <div className="guestbook-message-timestamp">{new Date(msg.timestamp).toLocaleString()}</div>
+            <div className="guestbook-message-header">
+              <div className="guestbook-message-name">{msg.name || "Nimetön"}</div>
+              {msg.name?.toLowerCase() === "admin" && (
+                <FaThumbtack className="pinned-icon" title="Kiinnitetty viesti" />
+              )}
+            </div>
+            <div className="guestbook-message-timestamp">
+              {new Date(msg.timestamp).toLocaleString()}
+            </div>
             <div className="guestbook-message-text">{msg.text}</div>
           </div>
         ))}

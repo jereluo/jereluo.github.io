@@ -17,7 +17,6 @@ function App() {
 
   useEffect(() => {
     const heroImg = new Image()
-    const h1Img = new Image()
     heroImg.src = heroImage
     
     const timer = setTimeout(() => {
