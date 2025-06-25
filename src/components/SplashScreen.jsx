@@ -1,4 +1,4 @@
-import logo from '/assets/images/Hero/logo.png'
+import logo from '/assets/images/Hero/logo.webp'
 
 function SplashScreen() {
   return (

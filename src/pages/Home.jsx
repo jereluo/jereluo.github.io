@@ -1,4 +1,4 @@
-import heroImage from '/assets/images/Hero/hero.jpg'
+import heroImage from '/assets/images/Hero/hero.webp'
 import './Home.css'
 
 

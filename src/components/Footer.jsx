@@ -4,7 +4,7 @@ function Footer() {
       <div className="sponsors">
       <a href="https://koneharjuoy.fi/" target="_blank" rel="noopener noreferrer">
   <img
-    src="assets/images/Sponsorit/koneharju.png"
+    src="assets/images/Sponsorit/koneharju.webp"
     style={{ height: '50px' }}
     alt="Koneharju Oy"
     className="sponsor-logo"
@@ -13,7 +13,7 @@ function Footer() {
 
 <a href="https://play.google.com/store/apps/details?id=com.jususteri.pathto100&hl=fi_FI" target="_blank" rel="noopener noreferrer">
   <img
-    src="assets/images/Sponsorit/Path to 100.png"
+    src="assets/images/Sponsorit/Path to 100.webp"
     alt="Path to 100"
     style={{ height: '65px' }}
     className="sponsor-logo"
@@ -22,7 +22,7 @@ function Footer() {
 
 <a href="https://www.autokorjaamohytonen.fi/" target="_blank" rel="noopener noreferrer">
   <img
-    src="assets/images/Sponsorit/hytonen.png"
+    src="assets/images/Sponsorit/hytonen.webp"
     alt="Autokorjaamo Velj. Hytönen Oy"
     style={{ height: '50px' }}
     className="sponsor-logo"

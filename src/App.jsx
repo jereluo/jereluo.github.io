@@ -9,7 +9,7 @@ import Home from './pages/Home'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact' 
 import Guestbook from './pages/Guestbook'
-import heroImage from '/assets/images/Hero/hero.jpg'
+import heroImage from '/assets/images/Hero/hero.webp'
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)
