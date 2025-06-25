@@ -133,8 +133,16 @@ function Gallery() {
               className={`popup-image ${isFullscreen ? 'fullscreen-image' : ''}`}
               onClick={toggleFullscreen}
               loading="eager"
+              style={{ cursor: isFullscreen ? 'zoom-out' : 'zoom-in' }}
             />
-
+              {isFullscreen && (
+                    <button
+                      onClick={() => setIsFullscreen(false)}
+                      className="fullscreen-close-button"
+                    >
+                      &times;
+                    </button>
+                  )}
             {selectedImageIndex + 1 < selectedEvent.images.length && (
               <link
                 rel="preload"
