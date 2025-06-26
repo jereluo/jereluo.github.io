@@ -4,9 +4,11 @@ import { dbFirestore } from '/firebase'
 import './Gallery.css'
 
 const GALLERY_CONFIG = [
-  { id: 1, category: 'KevatSlalom2023', title: 'XXX AKU Kevät23', thumbnailTitle: 'ks23' },
-  { id: 2, category: 'SyysSlalom2022', title: 'XXVI AKU Syys22', thumbnailTitle: 'ss22' },
-  { id: 3, category: 'Sekalaiset', title: 'Sekalaisia kuvia', thumbnailTitle: 'seka' },
+  { id: 1, category: 'PelaserSlalom2025', title: 'Pelaser AutoSlalom25', thumbnailTitle: 'pas25' },
+  { id: 2, category: 'KevatSlalom2025', title: 'XXXII AKU Kevät25', thumbnailTitle: 'ks25' },
+  { id: 3, category: 'KevatSlalom2023', title: 'XXX AKU Kevät23', thumbnailTitle: 'ks23' },
+  { id: 4, category: 'SyysSlalom2022', title: 'XXVI AKU Syys22', thumbnailTitle: 'ss22' },
+  { id: 5, category: 'Sekalaiset', title: 'Sekalaisia kuvia', thumbnailTitle: 'seka' },
 ]
 
 function Gallery() {
