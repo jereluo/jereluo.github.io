@@ -13,7 +13,7 @@ function Footer() {
 
 <a href="https://play.google.com/store/apps/details?id=com.jususteri.pathto100&hl=fi_FI" target="_blank" rel="noopener noreferrer">
   <img
-    src="assets/images/Sponsorit/Path to 100-new.webp"
+    src="assets/images/Sponsorit/Path to 100.webp"
     alt="Path to 100, Jylhä Racing tukija"
     style={{ height: '50px' }}
     className="sponsor-logo"
